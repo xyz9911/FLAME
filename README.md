@@ -5,7 +5,7 @@
 # FLAME (Flamingo-Architected Embodied Agent)
 
 <a href="https://flame-sjtu.github.io"><img src="https://img.shields.io/badge/🐬-Project%20Page-blue"></a>
-<a href="https://arxiv.org/"><img src="https://img.shields.io/badge/Paper-Arxiv-red"></a>
+<a href="https://arxiv.org/abs/2408.11051"><img src="https://img.shields.io/badge/Paper-Arxiv-red"></a>
 <a href="https://www.python.org/downloads/release/python-380/"><img src="https://img.shields.io/badge/python-3.8+-blue.svg"></a>
 
 This repository contains code for reproducing results. (will be released later)
@@ -68,12 +68,13 @@ FLAME achieves state-of-the-art results on both the Touchdown and Map2seq datase
 FLAME consistently outperforms prior models, proving that MLLMs can significantly outperform specialized VLN models.
 
 ## Citation
-If you find our research useful, please cite our [paper](https://arxiv.org/):
+If you find our research useful, please cite our [paper](https://arxiv.org/abs/2408.11051):
 
 ```
 @article{xu2024flame,
         title={FLAME: Learning to Navigate with Multimodal LLM in Urban Environments},
         author={Xu, Yunzhe and Pan, Yiyuan and Liu, Zhe and Wang, Hesheng},
+        journal={arXiv preprint arXiv:2408.11051},
         year={2024}}
 ```
 
