@@ -6,9 +6,14 @@
 
 <a href="https://flame-sjtu.github.io"><img src="https://img.shields.io/badge/🐬-Project%20Page-blue"></a>
 <a href="https://arxiv.org/abs/2408.11051"><img src="https://img.shields.io/badge/Paper-Arxiv-red"></a>
-<a href="https://www.python.org/downloads/release/python-380/"><img src="https://img.shields.io/badge/python-3.8+-blue.svg"></a>
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/flame-learning-to-navigate-with-multimodal/vision-and-language-navigation-on-touchdown)](https://paperswithcode.com/sota/vision-and-language-navigation-on-touchdown?p=flame-learning-to-navigate-with-multimodal)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/flame-learning-to-navigate-with-multimodal/vision-and-language-navigation-on-map2seq)](https://paperswithcode.com/sota/vision-and-language-navigation-on-map2seq?p=flame-learning-to-navigate-with-multimodal)
 
-This repository contains code for reproducing results. (will be released later)
+## 🔥 News
+
+* **[2024.12.27]** We release code for reproducing the SOTA results.
+* **[2024.12.9]** Our paper is accepted by AAAI 2025.
+* **[2024.8.20]** We release the [paper](https://arxiv.org/abs/2408.11051) and the [webpage](https://flame-sjtu.github.io) of our project.
 
 ## 📖 Table of Contents
 
@@ -16,7 +21,7 @@ This repository contains code for reproducing results. (will be released later)
 * [🤖️ Method Details](#-method-details)
 * [🛠️ Training and Evaluation](#-training-and-evaluation)
 ## 👋 Overview
-> Large Language Models (LLMs) have demonstrated potential in Vision-and-Language Navigation (VLN) tasks, yet current applications face challenges. While LLMs excel in general conversation scenarios, they struggle with specialized navigation tasks, yielding suboptimal performance compared to specialized VLN models. We introduce FLAME (FLAMingo-Architected Embodied Agent), a novel Multimodal LLM-based agent and architecture designed for urban VLN tasks that efficiently handles multiple observations. Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for trajectory summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically. Experimental results demonstrate FLAME's superiority over existing methods, surpassing state-of-the-art methods by a 7.3% increase in task completion rate on Touchdown dataset. This work showcases the potential of Multimodal LLMs (MLLMs) in complex navigation tasks, representing an advancement towards practical applications of MLLMs in embodied AI.
+> Large Language Models (LLMs) have demonstrated potential in Vision-and-Language Navigation (VLN) tasks, yet current applications face challenges. While LLMs excel in general conversation scenarios, they struggle with specialized navigation tasks, yielding suboptimal performance compared to specialized VLN models. We introduce FLAME (FLAMingo-Architected Embodied Agent), a novel Multimodal LLM-based agent and architecture designed for urban VLN tasks that efficiently handles multiple observations. Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for route summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically. Experimental results demonstrate FLAME's superiority over existing methods, surpassing state-of-the-art methods by a 7.3% increase in task completion on Touchdown dataset. This work showcases the potential of Multimodal LLMs (MLLMs) in complex navigation tasks, representing an advancement towards applications of MLLMs in the field of embodied intelligence.
 
 ## 🤖 Method Details
 <p float="left">
@@ -29,10 +34,125 @@ This repository contains code for reproducing results. (will be released later)
   <img src="assets/method2.png">
 </p>
 
-> Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for trajectory summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically.
+> Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for simple navigation scenario and trajectory summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically.
 
-## 🛠️ Training and Evaluation
-FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [OpenFlamingo](https://github.com/mlfoundations/open_flamingo). The training is based on Deepspeed. Detailed modules of the code will be released later.
+## 🛠️ Implementation
+FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [OpenFlamingo](https://github.com/mlfoundations/open_flamingo). The training is based on Deepspeed. We provide code for end-to-end training (navigation tuning) and evaluation on the Touchdown and Map2seq datasets.
+
+### Data Setup
+1. Download the outdoor VLN dataset from [Hugging Face](https://huggingface.co/datasets/xyz9911/Outdoor_VLN/tree/main) and place the downloaded data in the `dataset` folder. Unpack clip features from `touchdown_feature.tar` before use. (For the panoramas, you have to request and download from https://sites.google.com/view/streetlearn/dataset, though the provided clip features is sufficient for training and evaluation.)
+2. (Optional) Download the pretrained checkpoint from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training script.
+3. Install requirements:
+```setup
+conda create --name flame python=3.10
+conda activate flame
+pip install -r requirements.txt
+```
+
+
+### DeepSpeed Training
+We provide several training scripts (in the 'scripts' folder) using DeepSpeed ZERO-1 by default:
+
+**Basic Training (SOTA Results)**:
+- `ds_ft_touchdown.sh`: Touchdown dataset
+- `ds_ft_map2seq.sh`: Map2seq dataset
+
+**Rationale Training**:
+- `ds_ft_touchdown_rationale.sh`: Touchdown subset with rationales
+- `ds_ft_map2seq_rationale.sh`: Map2seq subset with rationales
+
+Usage:
+```bash
+# Single GPU (recommended)
+bash scripts/ds_ft_touchdown.sh <GPU_ID>
+
+# Multi-GPU (e.g., GPUs 0,1)
+bash scripts/ds_ft_touchdown.sh <GPU_IDS>
+```
+
+Example:
+```bash
+bash scripts/ds_ft_touchdown.sh 0
+```
+
+### Full Precision (FP32/TF32) Training
+For better stability or when DeepSpeed is not available:
+```bash
+python train_flame.py \
+    --model_path </path/to/pretrained_model> \
+    --train_if_data_path </path/to/ft_train_data> \
+    --eval_if_data_path </path/to/ft_dev_data> \
+    --dataset </path/to/data> \
+    --img_db "dataset/touchdown_feature" \
+    --batch_size 64 \
+    --micro_batch_size 1 \
+    --eval_data_size 128 \
+    --env_batch_size 4 \
+    --tf32 True \
+    --learning_rate 1e-4 \
+    --lr_scheduler_type "cosine" \
+    --warmup_ratio 0.01 \
+    --save_steps 100 \
+    --eval_steps 100 \
+    --num_train_epochs <epochs> \
+```
+
+### Evaluation
+
+**Basic Evaluation**:
+- `nav_touchdown.sh`: Touchdown dataset
+- `nav_map2seq.sh`: Map2seq dataset
+
+Usage:
+```bash
+bash scripts/nav_touchdown.sh <GPU_ID> <checkpoint_dir> <split> <checkpoint_numbers>
+```
+
+Example:
+```bash
+bash scripts/nav_touchdown.sh 0 checkpoints dev 1600 1700 1800
+```
+
+Parameters:
+- `GPU_ID`: GPU ID
+- `checkpoint_dir`: Directory containing checkpoints
+- `split`: Dataset split (dev or test)
+- `checkpoint_numbers`: Space-separated checkpoint steps to evaluate
+
+**Evaluation with Self-Consistency**:
+- `nav_touchdown_rationale.sh`: Touchdown subset with rationales
+- `nav_map2seq_rationale.sh`: Map2seq subset with rationales
+
+Usage:
+```bash
+bash scripts/nav_touchdown_rationale.sh <GPU_ID> <checkpoint_dir> <split> <temperature> <decoding_paths> <checkpoint_numbers>
+```
+
+Example:
+```bash
+bash scripts/nav_touchdown_rationale.sh 0 checkpoints 1.0 8 1600 1700 1800
+```
+
+Parameters:
+- `temperature`: Controls prediction randomness (0.0 for deterministic)
+- `decoding_paths`: Number of sampled trajectories
+
+### Important Notes
+
+#### Evaluation
+- In-training evaluation uses a subset (10%) of validation data for efficiency
+- Always perform full evaluation on saved checkpoints after training
+
+#### Training
+- When using DeepSpeed, apply early stopping around 2500 steps
+- Learning rate defaults to 1e-4
+- Batch size defaults to 64 in single-gpu mode (needs to be adjusted based on the world size)
+
+#### Hardware
+- BF16 training requires Ampere or newer GPUs
+- For older GPUs:
+  - Use FP16 with DeepSpeed
+  - Or use full precision training with TF32/FP32
 
 ## 📊 Performance
 
@@ -67,6 +187,10 @@ FLAME achieves state-of-the-art results on both the Touchdown and Map2seq datase
 
 FLAME consistently outperforms prior models, proving that MLLMs can significantly outperform specialized VLN models.
 
+## 💝 Acknowledgements
+
+We sincerely thank the [Otter](https://github.com/Luodian/Otter) team and the [OpenFlamingo](https://github.com/mlfoundations/open_flamingo) team for their great contribution to the Flamingo-architected Multimodal Large Language Models.
+
 ## Citation
 If you find our research useful, please cite our [paper](https://arxiv.org/abs/2408.11051):
 
@@ -77,4 +201,3 @@ If you find our research useful, please cite our [paper](https://arxiv.org/abs/2
         journal={arXiv preprint arXiv:2408.11051},
         year={2024}}
 ```
-
