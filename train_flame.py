@@ -34,7 +34,8 @@ def train():
     model_name = "llama" if "llama" in model_args.model_path.lower() else "mpt"
     model = FlamingoForConditionalGeneration.from_pretrained(
         model_args.model_path,
-        config=model_config
+        config=model_config,
+        device_map="auto"
     )
     model.lang_encoder.config.vocab_size = len(model.text_tokenizer)
     tokenizer = model.text_tokenizer
@@ -52,7 +53,7 @@ def train():
         warmup_ratio=training_args.warmup_ratio,
         num_train_epochs=training_args.num_train_epochs,
         learning_rate=training_args.learning_rate,
-        bf16=training_args.bf16,
+        tf32=training_args.tf32,
         optim=training_args.optim,
         lr_scheduler_type=training_args.lr_scheduler_type,
         evaluation_strategy=training_args.evaluation_strategy,
@@ -62,7 +63,6 @@ def train():
         save_total_limit=25,
         save_steps=training_args.save_steps,
         report_to=training_args.report_to,
-        deepspeed='ds_zero1_config.json'
     )
 
     trainer = FlameTrainer(model=model,

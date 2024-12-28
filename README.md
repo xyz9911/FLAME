@@ -37,7 +37,7 @@
 > Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for simple navigation scenario and trajectory summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically.
 
 ## 🛠️ Implementation
-FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [OpenFlamingo](https://github.com/mlfoundations/open_flamingo). The training is based on Deepspeed. We provide code for end-to-end training (navigation tuning) and evaluation on the Touchdown and Map2seq datasets.
+FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [OpenFlamingo](https://github.com/mlfoundations/open_flamingo). The training is based on DeepSpeed. We provide code for end-to-end training (navigation tuning) and evaluation on the Touchdown and Map2seq datasets.
 
 ### Data Setup
 1. Download the outdoor VLN dataset from [Hugging Face](https://huggingface.co/datasets/xyz9911/Outdoor_VLN/tree/main) and place the downloaded data in the `dataset` folder. Unpack clip features from `touchdown_feature.tar` before use. (For the panoramas, you have to request and download from https://sites.google.com/view/streetlearn/dataset, though the provided clip features is sufficient for training and evaluation.)
@@ -152,7 +152,7 @@ Parameters:
 - BF16 training requires Ampere or newer GPUs
 - For older GPUs:
   - Use FP16 with DeepSpeed
-  - Or use full precision training with TF32/FP32
+  - Or use full precision training with FP32
 
 ## 📊 Performance
 
