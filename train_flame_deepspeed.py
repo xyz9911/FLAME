@@ -53,6 +53,7 @@ def train():
         num_train_epochs=training_args.num_train_epochs,
         learning_rate=training_args.learning_rate,
         bf16=training_args.bf16,
+        tf32=training_args.tf32,
         optim=training_args.optim,
         lr_scheduler_type=training_args.lr_scheduler_type,
         evaluation_strategy=training_args.evaluation_strategy,

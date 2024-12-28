@@ -39,15 +39,19 @@
 ## 🛠️ Implementation
 FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [OpenFlamingo](https://github.com/mlfoundations/open_flamingo). The training is based on DeepSpeed. We provide code for end-to-end training (navigation tuning) and evaluation on the Touchdown and Map2seq datasets.
 
-### Data Setup
-1. Download the outdoor VLN dataset from [Hugging Face](https://huggingface.co/datasets/xyz9911/Outdoor_VLN/tree/main) and place the downloaded data in the `dataset` folder. Unpack clip features from `touchdown_feature.tar` before use. (For the panoramas, you have to request and download from https://sites.google.com/view/streetlearn/dataset, though the provided clip features is sufficient for training and evaluation.)
-2. (Optional) Download the pretrained checkpoint from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training script.
-3. Install requirements:
-```setup
-conda create --name flame python=3.10
-conda activate flame
-pip install -r requirements.txt
-```
+### Preparation
+1. Create a dataset directory and install dependencies:
+
+    ```setup
+    mkdir dataset
+    conda create --name flame python=3.10
+    conda activate flame
+    pip install -r requirements.txt
+    ```
+
+2. Download the outdoor VLN dataset from [Hugging Face](https://huggingface.co/datasets/xyz9911/Outdoor_VLN/tree/main) and place the downloaded data in the `dataset` folder. Unpack clip features from `touchdown_feature.tar` before use. (For the panoramas, you have to request and download from https://sites.google.com/view/streetlearn/dataset, though the provided clip features is sufficient for training and evaluation.)
+
+3. (Optional) Download the pretrained checkpoint from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training script.
 
 
 ### DeepSpeed Training

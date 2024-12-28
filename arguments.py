@@ -35,6 +35,7 @@ class TrainingArguments(transformers.TrainingArguments):
     learning_rate: float = field(default=1e-4)
     optim: str = field(default="adamw_torch")
     bf16: bool = field(default=True)
+    tf32: bool = field(default=False)
     # fp16: bool = field(default=True)
     model_max_length: int = field(
         default=2048,
