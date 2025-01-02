@@ -1,9 +1,4 @@
 import os
-
-os.environ["TRANSFORMERS_OFFLINE"] = "1"
-os.environ["HF_DATASETS_OFFLINE"] = "1"
-os.environ["WANDB_MODE"] = "offline"
-
 import transformers
 
 from llm_nav.trainer import FlameTrainer
