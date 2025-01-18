@@ -9,8 +9,9 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/flame-learning-to-navigate-with-multimodal/vision-and-language-navigation-on-touchdown)](https://paperswithcode.com/sota/vision-and-language-navigation-on-touchdown?p=flame-learning-to-navigate-with-multimodal)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/flame-learning-to-navigate-with-multimodal/vision-and-language-navigation-on-map2seq)](https://paperswithcode.com/sota/vision-and-language-navigation-on-map2seq?p=flame-learning-to-navigate-with-multimodal)
 
-## 🔥 News
+## 🔥 News (stay tuned for updates)
 
+* **[2025.1.18]** Our paper has been selected for oral presentation at the conference.
 * **[2024.12.27]** We release code for reproducing the SOTA results.
 * **[2024.12.9]** Our paper is accepted by AAAI 2025.
 * **[2024.8.20]** We release the [paper](https://arxiv.org/abs/2408.11051) and the [webpage](https://flame-sjtu.github.io) of our project.
@@ -19,7 +20,7 @@
 
 * [👋 Overview](#-overview)
 * [🤖️ Method Details](#-method-details)
-* [🛠️ Training and Evaluation](#-training-and-evaluation)
+* [🛠️ Implementation](#-implementation)
 ## 👋 Overview
 > Large Language Models (LLMs) have demonstrated potential in Vision-and-Language Navigation (VLN) tasks, yet current applications face challenges. While LLMs excel in general conversation scenarios, they struggle with specialized navigation tasks, yielding suboptimal performance compared to specialized VLN models. We introduce FLAME (FLAMingo-Architected Embodied Agent), a novel Multimodal LLM-based agent and architecture designed for urban VLN tasks that efficiently handles multiple observations. Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for route summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically. Experimental results demonstrate FLAME's superiority over existing methods, surpassing state-of-the-art methods by a 7.3% increase in task completion on Touchdown dataset. This work showcases the potential of Multimodal LLMs (MLLMs) in complex navigation tasks, representing an advancement towards applications of MLLMs in the field of embodied intelligence.
 
