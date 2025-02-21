@@ -21,6 +21,7 @@
 * [👋 Overview](#-overview)
 * [🤖️ Method Details](#-method-details)
 * [🛠️ Implementation](#-implementation)
+
 ## 👋 Overview
 > Large Language Models (LLMs) have demonstrated potential in Vision-and-Language Navigation (VLN) tasks, yet current applications face challenges. While LLMs excel in general conversation scenarios, they struggle with specialized navigation tasks, yielding suboptimal performance compared to specialized VLN models. We introduce FLAME (FLAMingo-Architected Embodied Agent), a novel Multimodal LLM-based agent and architecture designed for urban VLN tasks that efficiently handles multiple observations. Our approach implements a three-phase tuning technique for effective adaptation to navigation tasks, including single perception tuning for street view description, multiple perception tuning for route summarization, and end-to-end training on VLN datasets. The augmented datasets are synthesized automatically. Experimental results demonstrate FLAME's superiority over existing methods, surpassing state-of-the-art methods by a 7.3% increase in task completion on Touchdown dataset. This work showcases the potential of Multimodal LLMs (MLLMs) in complex navigation tasks, representing an advancement towards applications of MLLMs in the field of embodied intelligence.
 
@@ -50,10 +51,14 @@ FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [Ope
     pip install -r requirements.txt
     ```
 
-2. Download the outdoor VLN dataset from [Hugging Face](https://huggingface.co/datasets/xyz9911/Outdoor_VLN/tree/main) and place the downloaded data in the `dataset` folder. Unpack clip features from `touchdown_feature.tar` before use. (For the panoramas, you have to request and download from https://sites.google.com/view/streetlearn/dataset, though the provided clip features is sufficient for training and evaluation.)
+2. Download the outdoor VLN dataset from [Hugging Face](https://huggingface.co/datasets/xyz9911/Outdoor_VLN/tree/main) and place the downloaded data in the `dataset` folder. (For the panoramas, you have to request and download from https://sites.google.com/view/streetlearn/dataset, though the provided CLIP features is sufficient for training and evaluation.) Merge and unpack CLIP features from `touchdown_feature.tar*` before use:
 
-3. (Optional) Download the pretrained checkpoint from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training script.
+    ```setup
+    cat touchdown_feature.tar* > touchdown_feature.tar
+    tar -xvf touchdown_feature.tar
+    ```
 
+3. (Optional) Download the pretrained checkpoint from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training arguments.
 
 ### DeepSpeed Training
 We provide several training scripts (in the 'scripts' folder) using DeepSpeed ZERO-1 by default:
