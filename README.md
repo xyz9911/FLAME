@@ -11,6 +11,7 @@
 
 ## 🔥 News (stay tuned for updates)
 
+* **Update** We provide feature extracting scripts to facilitate the application of our method to various domains.
 * **[2025.1.18]** Our paper has been selected for oral presentation at the conference.
 * **[2024.12.27]** We release code for reproducing the SOTA results.
 * **[2024.12.9]** Our paper is accepted by AAAI 2025.
@@ -58,7 +59,7 @@ FLAME is implemented based on [Otter](https://github.com/Luodian/Otter) and [Ope
     tar -xvf touchdown_feature.tar
     ```
 
-3. (Optional) Download the pretrained checkpoint from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training arguments.
+3. (Optional) Download the pretrained checkpoint (with 2-phase tuning) from [Hugging Face](https://huggingface.co/xyz9911/FLAME-init/tree/main) and place it in a custom folder. You need to specify the model_path in the training arguments.
 
 ### DeepSpeed Training
 We provide several training scripts (in the 'scripts' folder) using DeepSpeed ZERO-1 by default:
