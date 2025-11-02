@@ -11,6 +11,7 @@
 
 ## 🔥 News (stay tuned for updates)
 
+* **Update** Check finetuned models [FLAME-touchdown](https://huggingface.co/xyz9911/FLAME-touchdown/tree/main) and [FLAME-map2seq](https://huggingface.co/xyz9911/FLAME-map2seq/tree/main) for touchdown and map2seq datasets.
 * **Update** We provide feature extracting scripts to facilitate the application of our method to various domains.
 * **[2025.1.18]** Our paper has been selected for oral presentation at the conference.
 * **[2024.12.27]** We release code for reproducing the SOTA results.
