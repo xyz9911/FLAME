@@ -4,7 +4,7 @@
 
 # FLAME (Flamingo-Architected Embodied Agent)
 
-<a href="https://flame-sjtu.github.io"><img src="https://img.shields.io/badge/🐬-Project%20Page-blue"></a>
+<a href="https://xyz9911.github.io/flame/"><img src="https://img.shields.io/badge/🐬-Project%20Page-blue"></a>
 <a href="https://arxiv.org/abs/2408.11051"><img src="https://img.shields.io/badge/Paper-Arxiv-red"></a>
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/flame-learning-to-navigate-with-multimodal/vision-and-language-navigation-on-touchdown)](https://paperswithcode.com/sota/vision-and-language-navigation-on-touchdown?p=flame-learning-to-navigate-with-multimodal)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/flame-learning-to-navigate-with-multimodal/vision-and-language-navigation-on-map2seq)](https://paperswithcode.com/sota/vision-and-language-navigation-on-map2seq?p=flame-learning-to-navigate-with-multimodal)
@@ -16,7 +16,7 @@
 * **[2025.1.18]** Our paper has been selected for oral presentation at the conference.
 * **[2024.12.27]** We release code for reproducing the SOTA results.
 * **[2024.12.9]** Our paper is accepted by AAAI 2025.
-* **[2024.8.20]** We release the [paper](https://arxiv.org/abs/2408.11051) and the [webpage](https://flame-sjtu.github.io) of our project.
+* **[2024.8.20]** We release the [paper](https://arxiv.org/abs/2408.11051) and the [webpage](https://xyz9911.github.io/flame/) of our project.
 
 ## 📖 Table of Contents
 
